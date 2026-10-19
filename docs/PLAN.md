@@ -169,16 +169,16 @@ In the tests, the browser is the handler and the test's API calls play the agent
 
 **Success criteria**
 
-- [ ] vitest tests cover the sign-off panel: it appears only for `awaiting_signoff`, the button posts the chosen handler, and the page shows the result.
-- [ ] `npm run e2e` passes with these tests:
-  - [ ] the queue lists 25 waiting claims;
-  - [ ] a claim the "agent" starts, works and approves for $420 shows as Decided with its reason, policy section and "Paid $420.00";
-  - [ ] a claim approved for $2,200 shows "Waiting for sign-off"; a direct payment through the API is refused with 409; a handler signs off in the browser, and the page then shows the handler's name and "Paid $2,200.00";
-  - [ ] the Instructions page has no way to edit;
-  - [ ] the existing health test.
-- [ ] `npm run e2e` passes twice in a row, because each run starts from a fresh database.
-- [ ] With `npm run dev` running, `curl localhost:8000/api/claims` still shows 25 waiting claims after `npm run e2e`, so the tests never touched the development database.
-- [ ] `npm run check` passes.
+- [x] vitest tests cover the sign-off panel: it appears only for `awaiting_signoff`, the button posts the chosen handler, and the page shows the result.
+- [x] `npm run e2e` passes with these tests:
+  - [x] the queue lists 25 waiting claims;
+  - [x] a claim the "agent" starts, works and approves for $420 shows as Decided with its reason, policy section and "Paid $420.00";
+  - [x] a claim approved for $2,200 shows "Waiting for sign-off"; a direct payment through the API is refused with 409; a handler signs off in the browser, and the page then shows the handler's name and "Paid $2,200.00";
+  - [x] the Instructions page has no way to edit;
+  - [x] the existing health test.
+- [x] `npm run e2e` passes twice in a row, because each run starts from a fresh database.
+- [x] With `npm run dev` running, `curl localhost:8000/api/claims` still shows 25 waiting claims after `npm run e2e`, so the tests never touched the development database.
+- [x] `npm run check` passes.
 
 ## Phase 6: A whole run, and the hand-over
 

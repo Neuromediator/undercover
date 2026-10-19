@@ -91,6 +91,19 @@ async function get<T>(path: string): Promise<T> {
   return (await response.json()) as T;
 }
 
+async function post<T>(path: string, body: object): Promise<T> {
+  const response = await fetch(path, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    const problem = (await response.json()) as { detail: string };
+    throw new Error(problem.detail);
+  }
+  return (await response.json()) as T;
+}
+
 export const getHealth = () => get<Record<string, unknown>>("/api/health");
 export const listClaims = () => get<ClaimSummary[]>("/api/claims");
 export const getClaim = (claimId: string) =>
@@ -103,3 +116,5 @@ export const getClaimHistory = (customerId: string) =>
   get<ClaimHistory>(`/api/customers/${customerId}/claim-history`);
 export const getHandlers = () => get<Handler[]>("/api/handlers");
 export const getInstructions = () => get<{ text: string }>("/api/instructions");
+export const signOff = (claimId: string, handlerId: string) =>
+  post<Claim>(`/api/claims/${claimId}/sign-off`, { handler_id: handlerId });

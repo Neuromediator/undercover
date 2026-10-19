@@ -283,6 +283,44 @@ tbody tr:nth-child(even) {
   font-weight: 600;
 }
 
+.signoff {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 12px;
+}
+
+.signoff .alert {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+select {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--tint);
+  color: var(--text);
+  font: inherit;
+}
+
+button.primary {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--lagoon);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .reason {
   font-family: var(--serif);
   font-size: 1.3rem;

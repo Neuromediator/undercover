@@ -20,6 +20,7 @@ import {
   preview,
 } from "./format";
 import { Notice, OutcomeLabel, StageChip } from "./Parts";
+import { SignOff } from "./SignOff";
 import { POLL_MS, usePolling } from "./usePolling";
 
 async function loadClaimPage(claimId: string) {
@@ -80,8 +81,14 @@ function noDecisionText(claim: Claim): string {
     : "No decision yet.";
 }
 
-function Decision(props: Readonly<{ claim: Claim; handlers: Handler[] }>) {
-  const { claim } = props;
+function Decision(
+  props: Readonly<{
+    claim: Claim;
+    handlers: Handler[];
+    onSignedOff: () => void;
+  }>,
+) {
+  const { claim, handlers, onSignedOff } = props;
   return (
     <section className="panel">
       <h2>Decision</h2>
@@ -100,7 +107,16 @@ function Decision(props: Readonly<{ claim: Claim; handlers: Handler[] }>) {
           </p>
           <p className="reason">{claim.reason}</p>
           <p className="muted">Policy section: {claim.policy_section}</p>
-          {claim.decision === "approve" && <PaymentInfo {...props} />}
+          {claim.decision === "approve" && (
+            <PaymentInfo claim={claim} handlers={handlers} />
+          )}
+          {claim.status === "awaiting_signoff" && (
+            <SignOff
+              claim={claim}
+              handlers={handlers}
+              onSignedOff={onSignedOff}
+            />
+          )}
         </>
       )}
     </section>
@@ -266,7 +282,7 @@ function History({ history }: Readonly<{ history: ClaimHistory }>) {
 
 export function ClaimPage({ claimId }: Readonly<{ claimId: string }>) {
   const load = useCallback(() => loadClaimPage(claimId), [claimId]);
-  const { data, error } = usePolling(load, POLL_MS);
+  const { data, error, reload } = usePolling(load, POLL_MS);
 
   if (!data) {
     return (
@@ -289,7 +305,7 @@ export function ClaimPage({ claimId }: Readonly<{ claimId: string }>) {
       {error && <Notice>Lost contact with the backend.</Notice>}
       <div className="layout">
         <div>
-          <Decision claim={claim} handlers={handlers} />
+          <Decision claim={claim} handlers={handlers} onSignedOff={reload} />
           <Activity claim={claim} steps={steps} />
           <Story claim={claim} />
           <Items claim={claim} />

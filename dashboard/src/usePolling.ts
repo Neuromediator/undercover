@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const POLL_MS = 2000;
 
 interface Polled<T> {
   data: T | undefined;
   error: boolean;
+  reload: () => void;
 }
 
 export function usePolling<T>(
@@ -13,6 +14,7 @@ export function usePolling<T>(
 ): Polled<T> {
   const [data, setData] = useState<T>();
   const [error, setError] = useState(false);
+  const [reloads, setReloads] = useState(0);
 
   useEffect(() => {
     let active = true;
@@ -33,7 +35,11 @@ export function usePolling<T>(
       active = false;
       clearInterval(timer);
     };
-  }, [load, intervalMs]);
+  }, [load, intervalMs, reloads]);
 
-  return { data, error };
+  const reload = useCallback(() => {
+    setReloads((count) => count + 1);
+  }, []);
+
+  return { data, error, reload };
 }
