@@ -130,15 +130,15 @@ The instructions say, in plain language:
 
 **Success criteria**
 
-- [ ] `curl localhost:8000/api/instructions` returns the instructions, and they mention the $1,000 limit.
-- [ ] Test with a stub model that approves $420 and pays: the claim ends `decided` and paid, and its steps include a tool call, a tool result and a final message, in order.
-- [ ] Test with a stub model that approves $2,200 and then tries to pay: the tool returns the sign-off message to the model, the claim stays `awaiting_signoff` and unpaid.
-- [ ] Tests with a stub model that declines and that refers: the reason and policy section are stored.
-- [ ] `run` can be called twice for the same claim without an error, so a stuck run can be retried.
-- [ ] `grep -rn "backend" agent --include=*.py` shows only the URL, the tests and the fixtures, so the agent reaches the backend through its API alone.
-- [ ] No test calls a model: `grep -rn "OPENROUTER" agent/tests` finds only the existing `model()` test, which builds a client and sends nothing.
-- [ ] A real run with the model in `OPENROUTER_API_KEY`: with the backend up, `uv run -m agent.main CLM-1001` finishes. `curl .../api/claims/CLM-1001` then shows a decision, a reason and a policy section, and `curl .../api/claims/CLM-1001/steps` shows the work. If the key or the model fails, I stop and tell you what happened.
-- [ ] `npm run check:python` passes.
+- [x] `curl localhost:8000/api/instructions` returns the instructions, and they mention the $1,000 limit.
+- [x] Test with a stub model that approves $420 and pays: the claim ends `decided` and paid, and its steps include a tool call, a tool result and a final message, in order.
+- [x] Test with a stub model that approves $2,200 and then tries to pay: the tool returns the sign-off message to the model, the claim stays `awaiting_signoff` and unpaid.
+- [x] Tests with a stub model that declines and that refers: the reason and policy section are stored.
+- [x] `run` can be called twice for the same claim without an error, so a stuck run can be retried.
+- [x] `grep -rn "backend" agent --include=*.py` shows only the URL, the tests and the fixtures, so the agent reaches the backend through its API alone.
+- [x] No test calls a model: `grep -rn "OPENROUTER" agent/tests` finds only the existing `model()` test, which builds a client and sends nothing.
+- [x] A real run with the model in `OPENROUTER_API_KEY`: with the backend up, `uv run -m agent.main CLM-1001` finishes. `curl .../api/claims/CLM-1001` then shows a decision, a reason and a policy section, and `curl .../api/claims/CLM-1001/steps` shows the work. If the key or the model fails, I stop and tell you what happened.
+- [x] `npm run check:python` passes.
 
 ## Phase 4: The dashboard
 

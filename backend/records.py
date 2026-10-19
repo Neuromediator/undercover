@@ -1,4 +1,6 @@
-"""The insurer's records: policies, customers, handlers and the wording."""
+"""The insurer's records, the policy wording and the agent's instructions."""
+
+from pathlib import Path
 
 from fastapi import APIRouter
 
@@ -7,6 +9,8 @@ from backend.models import ClaimHistory, Handler, Policy, Text
 from backend.seed import DATA
 
 router = APIRouter(prefix="/api")
+
+INSTRUCTIONS = Path(__file__).parent / "instructions.md"
 
 
 @router.get("/policies/{policy_id}", operation_id="get_policy")
@@ -28,6 +32,12 @@ def get_claim_history(customer_id: str, db: Db) -> ClaimHistory:
 def get_policy_wording() -> Text:
     """Get the policy wording as text."""
     return Text(text=(DATA / "policy_wording.md").read_text(encoding="utf-8"))
+
+
+@router.get("/instructions", operation_id="get_instructions")
+def get_instructions() -> Text:
+    """Get the agent's instructions as text."""
+    return Text(text=INSTRUCTIONS.read_text(encoding="utf-8"))
 
 
 @router.get("/handlers", operation_id="list_handlers")

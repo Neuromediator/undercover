@@ -62,3 +62,9 @@ def test_list_handlers(client):
         "HND-03",
     ]
     assert all(handler["can_approve_over_limit"] is True for handler in handlers)
+
+
+def test_instructions(client):
+    text = client.get("/api/instructions").json()["text"]
+    assert text.startswith("# The UnderCover Agent")
+    assert "$1,000" in text

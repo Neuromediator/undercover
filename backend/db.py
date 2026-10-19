@@ -98,8 +98,12 @@ def db_path() -> Path:
 
 
 def get_db() -> Iterator[sqlite3.Connection]:
-    """Open a connection for one request and commit when the request succeeds."""
-    with closing(sqlite3.connect(db_path())) as conn, conn:
+    """Open a connection for one request and commit when the request succeeds.
+
+    FastAPI opens it in one worker thread and runs the endpoint in another, but
+    only one of them uses it at a time.
+    """
+    with closing(sqlite3.connect(db_path(), check_same_thread=False)) as conn, conn:
         conn.row_factory = sqlite3.Row
         yield conn
 
