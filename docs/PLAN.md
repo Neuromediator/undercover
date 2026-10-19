@@ -152,14 +152,14 @@ Structure: `api.ts` with the types and a typed fetch for each operation, a small
 
 **Success criteria**
 
-- [ ] vitest tests with a stubbed `fetch` cover: queue rows and stage labels, the stage filter, the claim page with and without a decision, the step feed, the instructions page, and the money format. Coverage is 80% or more.
-- [ ] `npm run check:ts` passes: prettier, eslint, `tsc` in strict mode and vitest. `grep -rnE ": any|as any|<any>" dashboard/src` finds nothing.
-- [ ] Playwright MCP on a freshly seeded database, at `localhost:5173`: the snapshot shows 25 claim rows, all "Waiting", with the stage counts above the table.
-- [ ] Playwright MCP: the stage filter narrows the table, and opening CLM-1001 shows the story, 3 items, 4 documents, the Premium plan and the claim history.
-- [ ] Playwright MCP, live: with the claim page open, run `uv run -m agent.main CLM-1001` (or the same calls with curl). The stage goes Waiting, In progress, Decided and the steps appear without a reload. I check the snapshot a few seconds apart.
-- [ ] Playwright MCP: the Instructions page shows the text and has no textarea, input or button.
-- [ ] Playwright MCP: screenshots in light and dark mode (`browser_emulate_media`) use the Paper and Night backgrounds, with panels that have no outline. The computed font of the body is Instrument Sans, and identifiers and amounts use JetBrains Mono.
-- [ ] Playwright MCP: at 1280 px and at 390 px wide the page has no horizontal scroll, and the console has no errors.
+- [x] vitest tests with a stubbed `fetch` cover: queue rows and stage labels, the stage filter, the claim page with and without a decision, the step feed, the instructions page, and the money format. Coverage is 80% or more.
+- [x] `npm run check:ts` passes: prettier, eslint, `tsc` in strict mode and vitest. `grep -rnE ": any|as any|<any>" dashboard/src` finds nothing.
+- [x] Playwright MCP on a freshly seeded database, at `localhost:5173`: the snapshot shows 25 claim rows, all "Waiting", with the stage counts above the table.
+- [x] Playwright MCP: the stage filter narrows the table, and opening CLM-1001 shows the story, 3 items, 4 documents, the Premium plan and the claim history.
+- [x] Playwright MCP, live: with the claim page open, run `uv run -m agent.main CLM-1001` (or the same calls with curl). The stage goes Waiting, In progress, Decided and the steps appear without a reload. I check the snapshot a few seconds apart.
+- [x] Playwright MCP: the Instructions page shows the text and has no textarea, input or button.
+- [x] Playwright MCP: screenshots in light and dark mode (`browser_emulate_media`) use the Paper and Night backgrounds, with panels that have no outline. The computed font of the body is Instrument Sans, and identifiers and amounts use JetBrains Mono.
+- [x] Playwright MCP: at 1280 px and at 390 px wide the page has no horizontal scroll, and the console has no errors.
 
 ## Phase 5: Sign-off, and the end-to-end tests
 

@@ -1,6 +1,6 @@
 # Status
 
-The pilot is being built in the phases of `docs/PLAN.md`. Done so far: phases 1 to 3.
+The pilot is being built in the phases of `docs/PLAN.md`. Done so far: phases 1 to 4.
 
 ## What is built
 
@@ -9,8 +9,12 @@ The pilot is being built in the phases of `docs/PLAN.md`. Done so far: phases 1 
   - Workflow: `POST /api/claims/{claim_id}/start`, `GET` and `POST /api/claims/{claim_id}/steps`, `POST .../decision`, `POST .../payment`, `POST .../sign-off`
   - The agent's instructions are `backend/instructions.md`, served read only.
 - `agent/`: the UnderCover Agent. `run(claim_id, thread_id)` fetches the instructions from the backend, starts the claim, runs a `create_agent` agent with six tools (`get_claim`, `get_policy`, `get_claim_history`, `get_policy_wording`, `decide_claim`, `pay_claim`) and posts every step to the backend. It reaches the backend only through its API. A refusal from the backend goes back to the model as text.
-- `dashboard/`: still one page that shows whether the backend is up.
-- `e2e/`: one test of that page.
+- `dashboard/`: React, Vite and TypeScript, styled to `docs/BRAND.md` in light and dark. Read only for now, and it refreshes every 2 seconds.
+  - Queue (`#/`): every claim with its stage, outcome, payout and payment, and a filter by stage with counts.
+  - Claim (`#/claims/CLM-1001`): the decision and its reason, what the agent did step by step, the story, items, documents, the policy and the claim history.
+  - Agent instructions (`#/instructions`): the instructions as plain text, nothing to edit.
+  - `src/api.ts` has the types and one fetch per operation. Helpers and hooks are `.ts` files, components are `.tsx`. `src/fixtures.ts` is for the tests.
+- `e2e/`: one test of the health text. The sign-off and the end-to-end tests come in phase 5.
 
 ## The claim workflow
 
