@@ -121,3 +121,11 @@ def find(db: sqlite3.Connection, sql: str, key: str, what: str) -> dict[str, Any
     if row is None:
         raise HTTPException(404, f"{what} {key} not found")
     return to_dict(row)
+
+
+def payout_limit(db: sqlite3.Connection) -> float:
+    """Return the payout above which a handler must sign off."""
+    row = db.execute(
+        "SELECT value FROM settings WHERE key = 'payout_approval_limit'"
+    ).fetchone()
+    return float(row[0])

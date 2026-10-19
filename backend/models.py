@@ -1,11 +1,12 @@
-"""The shapes of the API's answers."""
+"""The shapes of what the API takes and answers."""
 
-from typing import Literal
+from typing import Literal, Self
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, model_validator
 
 Stage = Literal["waiting", "in_progress", "awaiting_signoff", "decided"]
 Outcome = Literal["approve", "decline", "refer"]
+StepKind = Literal["message", "tool_call", "tool_result"]
 
 
 class ClaimSummary(BaseModel):
@@ -129,3 +130,58 @@ class Handler(BaseModel):
     name: str
     role: str
     can_approve_over_limit: bool
+
+
+class Step(BaseModel):
+    """One thing the agent did on a claim."""
+
+    id: int
+    claim_id: str
+    thread_id: str
+    kind: StepKind
+    text: str
+    created_at: str
+
+
+class NewRun(BaseModel):
+    """The run that starts working a claim."""
+
+    thread_id: str
+
+
+class NewStep(BaseModel):
+    """A step to record."""
+
+    thread_id: str
+    kind: StepKind
+    text: str
+
+
+class NewDecision(BaseModel):
+    """The agent's decision on a claim."""
+
+    decision: Outcome
+    payout: float = Field(ge=0)
+    reason: str
+    policy_section: str
+
+    @model_validator(mode="after")
+    def payout_fits_the_decision(self) -> Self:
+        """Require a payout for an approval and none for anything else."""
+        if (self.decision == "approve") != (self.payout > 0):
+            raise ValueError(
+                "an approval needs a payout above 0; a decline or a referral needs 0"
+            )
+        return self
+
+
+class NewPayment(BaseModel):
+    """A payment of an approved claim."""
+
+    amount: float
+
+
+class NewSignOff(BaseModel):
+    """The handler who signs off a payout over the limit."""
+
+    handler_id: str

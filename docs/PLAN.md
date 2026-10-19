@@ -99,18 +99,18 @@ The lint rules are strict (complexity of 10, no magic numbers outside tests, no 
 
 Run these with curl against a freshly seeded database, then again as pytest cases.
 
-- [ ] `start_claim` on CLM-1001 returns stage `in_progress`, and `list_claims` shows it. Starting it again is allowed. Starting a decided claim returns 409.
-- [ ] `add_step` followed by `list_steps` returns the steps in the order they were added, each with a timestamp.
-- [ ] `decide_claim` on a claim that was not started returns 409. A second decision on the same claim returns 409.
-- [ ] Approve CLM-1001 for $420.00: the stage is `decided`, `pay_claim` for 420 sets `paid_amount` and `paid_at`, and a second `pay_claim` returns 409.
-- [ ] Approve CLM-1008 for $2,200.00: the stage is `awaiting_signoff`. `pay_claim` for 2200 returns 409 with a message that mentions the handler's sign-off, and the claim is still unpaid.
-- [ ] `pay_claim` with an amount other than the approved payout returns 409.
-- [ ] `sign_off_claim` on CLM-1008 by HND-01 returns stage `decided`, with `signed_off_by` HND-01 and `paid_amount` 2200. A second sign-off returns 409. An unknown handler returns 404. A handler without `can_approve_over_limit` returns 403.
-- [ ] A payout of exactly $1,000.00 is paid without sign-off. A payout of $1,000.01 is held.
-- [ ] A decline or a refer with a payout above 0 returns 422, and so does an approve with a payout of 0.
-- [ ] Declining CLM-1004 and referring CLM-1005 both end at stage `decided`, with the reason and policy section stored.
-- [ ] The openapi test from Phase 1 still passes with the new operations.
-- [ ] `npm run check:python` passes.
+- [x] `start_claim` on CLM-1001 returns stage `in_progress`, and `list_claims` shows it. Starting it again is allowed. Starting a decided claim returns 409.
+- [x] `add_step` followed by `list_steps` returns the steps in the order they were added, each with a timestamp.
+- [x] `decide_claim` on a claim that was not started returns 409. A second decision on the same claim returns 409.
+- [x] Approve CLM-1001 for $420.00: the stage is `decided`, `pay_claim` for 420 sets `paid_amount` and `paid_at`, and a second `pay_claim` returns 409.
+- [x] Approve CLM-1008 for $2,200.00: the stage is `awaiting_signoff`. `pay_claim` for 2200 returns 409 with a message that mentions the handler's sign-off, and the claim is still unpaid.
+- [x] `pay_claim` with an amount other than the approved payout returns 409.
+- [x] `sign_off_claim` on CLM-1008 by HND-01 returns stage `decided`, with `signed_off_by` HND-01 and `paid_amount` 2200. A second sign-off returns 409. An unknown handler returns 404. A handler without `can_approve_over_limit` returns 403.
+- [x] A payout of exactly $1,000.00 is paid without sign-off. A payout of $1,000.01 is held.
+- [x] A decline or a refer with a payout above 0 returns 422, and so does an approve with a payout of 0.
+- [x] Declining CLM-1004 and referring CLM-1005 both end at stage `decided`, with the reason and policy section stored.
+- [x] The openapi test from Phase 1 still passes with the new operations.
+- [x] `npm run check:python` passes.
 
 ## Phase 3: The agent
 
