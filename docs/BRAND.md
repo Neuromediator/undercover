@@ -10,22 +10,34 @@ From Google Fonts:
 
 ## Colors
 
-- **Primary**: Sea Green `#06D6A0`, Midnight text
-- **Secondary**: Marigold `#FFC145`, Midnight text
-- **Tertiary**: Coral `#F78C6B`, Midnight text
-- **Information**: Cerulean `#118AB2`, white text
-- **Highlight or alert**: Raspberry `#EF476F`, white text
-- **Ink on light backgrounds**: Midnight `#073B4C`
-- **Ink on dark backgrounds**: Sea Mist `#CDD8DB`
+- **Primary**: Lagoon `#0E7C7B`, white text
+- **Secondary**: Saffron `#F2A93B`, Ink text
+- **Tertiary**: Iris `#6E5BD6`, white text
+- **Information**: Harbor `#2563C9`, white text
+- **Highlight or alert**: Ember `#C53A2A`, white text
+- **Ink on light backgrounds**: Ink `#16233A`
+- **Ink on dark backgrounds**: Fog `#E4E8EF`
 
-Use Sea Green, Marigold and Coral when three things sit side by side, such as a claim's states or chart series. Add Cerulean fourth and Raspberry fifth.
+Use Lagoon, Saffron and Iris when three things sit side by side, such as a claim's states or chart series. Add Harbor fourth and Ember fifth. Ember is reserved for problems, so never use it as a plain series color when fewer than five are needed.
+
+### Text tints
+
+Lagoon passes for text on light backgrounds as it is. Saffron does not, so use the darker or lighter tint:
+
+| Color | On light backgrounds | On dark backgrounds |
+|---|---|---|
+| Lagoon | `#0E7C7B` | `#4FD1C5` |
+| Saffron | `#9A5B00` | `#F7C873` |
+| Iris | `#6E5BD6` | `#A99BF5` |
+
+All pairs on this page meet WCAG AA contrast (4.5:1) for normal text.
 
 ## Surfaces
 
-- **Light mode**: page background `#F0F4F5`, white panels and cards
-- **Dark mode**: page background `#04232E`, black panels and cards
+- **Light mode**: page background Paper `#F5F3EE`, white panels and cards
+- **Dark mode**: page background Night `#0D1624`, panels and cards `#16233A`
 
-Panels are rounded with no outline. Sea Green and Marigold are too bright for small text, so darken them for headings and body text on light backgrounds and lighten them on dark ones.
+Panels are rounded with no outline. In dark mode, panels are a step lighter than the page instead of black, so depth comes from lightness and no outline is needed.
 
 ## Avoid
 
