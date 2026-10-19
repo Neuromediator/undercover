@@ -186,14 +186,14 @@ In the tests, the browser is the handler and the test's API calls play the agent
 
 **Success criteria**
 
-- [ ] Seed a fresh database and start `npm run dev`. Run the real agent, one by one, on a mix of claims and watch each one live in the dashboard through Playwright MCP: CLM-1001 (trip delay, $420), CLM-1002 (baggage, $1,150), CLM-1008 (trip cancellation, $2,440) and CLM-1003 (emergency medical, $3,800). These sit on both sides of the limit. Each ends `decided` or `awaiting_signoff`, with a two or three sentence reason and a policy section.
-- [ ] Any claim the agent approves over $1,000 is unpaid until I sign it off in the dashboard. Then it shows the handler and the payment.
-- [ ] I read the four decisions against the wording and tell you what looks wrong. I do not compare them with `data/evals/`, which I leave closed.
-- [ ] If the run shows the instructions need work, I fix `backend/instructions.md`, re-run the affected claim and say what changed.
-- [ ] `docs/STATUS.md` says what is built, how to run it (`npm run dev`, `npm run agent`, `uv run -m backend.seed`, `npm run check`), the ports and the databases, and lists the operations.
-- [ ] `npm run check` passes. I report the results, with the Python and TypeScript coverage figures.
-- [ ] The git log has one commit per phase, none made with `--no-verify`, and nothing is pushed.
-- [ ] I leave `backend/undercover.db` freshly seeded, so your first run starts from 25 waiting claims.
+- [x] Seed a fresh database and start `npm run dev`. Run the real agent, one by one, on a mix of claims and watch each one live in the dashboard through Playwright MCP: CLM-1001 (trip delay, $420), CLM-1002 (baggage, $1,150), CLM-1008 (trip cancellation, $2,440) and CLM-1003 (emergency medical, $3,800). These sit on both sides of the limit. Each ends `decided` or `awaiting_signoff`, with a two or three sentence reason and a policy section.
+- [x] Any claim the agent approves over $1,000 is unpaid until I sign it off in the dashboard. Then it shows the handler and the payment.
+- [x] I read the four decisions against the wording and tell you what looks wrong. I do not compare them with `data/evals/`, which I leave closed.
+- [x] If the run shows the instructions need work, I fix `backend/instructions.md`, re-run the affected claim and say what changed.
+- [x] `docs/STATUS.md` says what is built, how to run it (`npm run dev`, `npm run agent`, `uv run -m backend.seed`, `npm run check`), the ports and the databases, and lists the operations.
+- [x] `npm run check` passes. I report the results, with the Python and TypeScript coverage figures.
+- [x] The git log has one commit per phase, none made with `--no-verify`, and nothing is pushed.
+- [x] I leave `backend/undercover.db` freshly seeded, so your first run starts from 25 waiting claims.
 
 ---
 
